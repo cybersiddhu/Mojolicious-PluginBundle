@@ -56,7 +56,7 @@ sub register {
                     $tags .= qq/alt="$options{alt}"/;
                 }
                 for my $opt_name ( @{ $self->image_options } ) {
-                    $tags .= qq/$opt_name="$options{$opt_name}"/
+                    $tags .= qq/ $opt_name="$options{$opt_name}"/
                         if defined $options{$opt_name};
                 }
             }
@@ -182,7 +182,7 @@ sub compute_image_path {
     my $image_path
         = $default
         ? $self->compute_asset_path( catfile( $self->image_dir, $name ) )
-        : $self->compute_asset_dir($name);
+        : $self->compute_asset_path($name);
     my $asset_id
         = $default
         ? $self->compute_asset_id( catfile( $self->image_dir, $name ) )
