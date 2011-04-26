@@ -50,7 +50,7 @@ sub register {
             my $tags;
             if (%options) {
                 if ( defined $options{size} ) {
-                    $tags = qq/height="$options{size} width="$options{size}"/;
+                    $tags = qq/height="$options{size}" width="$options{size}"/;
                 }
                 if ( defined $options{alt} ) {
                     $tags .= qq/alt="$options{alt}"/;
@@ -62,7 +62,7 @@ sub register {
             }
             else {
                 my $alt_name = $self->compute_alt_name($name);
-                $tags .= $tags .= qq/alt="$alt_name"/;
+                $tags .= qq/alt="$alt_name"/;
             }
 
             my $source = $self->compute_image_path( $name, $self->true );
