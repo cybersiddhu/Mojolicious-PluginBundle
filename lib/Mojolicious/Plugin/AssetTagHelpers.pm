@@ -6,7 +6,7 @@ use strict;
 use base qw/Mojolicious::Plugin/;
 use Mojo::ByteStream;
 use Regexp::Common qw/URI/;
-use Mojo::Client;
+use Mojo::UserAgent;
 use HTTP::Date;
 use File::stat;
 use File::Spec::Functions;
@@ -37,7 +37,7 @@ sub register {
         $app->log->debug("relative url root: $url");
 
 # -- in case of non-default value strip off the name before serving the assets
-        $app->static->prefix($url);
+        $app->static->root($url);
     }
     if ( my $host = $self->compute_asset_host( @_[ 1, -1 ] ) ) {
         $self->asset_host($host);
@@ -162,7 +162,7 @@ sub compute_alt_name {
 sub compute_asset_id {
     my ( $self, $file ) = @_;
     if ( $file =~ $RE{URI}{HTTP} ) {
-        my $tx = Mojo::Client->new->head($file);
+        my $tx = Mojo::UserAgent->new->head($file);
         if ( $tx->res->code == 200 ) {
             my $asset_id = str2time( $tx->res->headers->last_modified );
             return $asset_id;

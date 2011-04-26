@@ -10,11 +10,11 @@ sub list {
     $self->render( message => 'Showing list of product!' );
 }
 
-sub type {
+sub morelist {
     my $self = shift;
 
     # render default/type.html.ep
-    $self->render( message => 'we have '.$self->stash('type') );
+    $self->render(template => 'default/list', message => 'Showing list of product!' );
 }
 
 sub show {
