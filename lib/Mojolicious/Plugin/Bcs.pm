@@ -27,8 +27,8 @@ sub register {
             $dsn      = $database->{dsn};
             $user     = $database->{user} || '';
             $password = $database->{password} || '';
+            $attr = $database->{attr} || {};
         }
-        $attr = $database->{attr} || { LongReadLen => 2**10 };
     }
     my $schema = Bio::Chado::Schema->connect( $dsn, $user, $password, $attr );
 

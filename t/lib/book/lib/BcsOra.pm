@@ -1,4 +1,4 @@
-package Book;
+package Bcs;
 
 use strict;
 use base 'Mojolicious';
@@ -10,15 +10,16 @@ sub startup {
     # Routes
     my $r = $self->routes;
     $self->plugin(
-        'yml_config',
-        {   stash_key => 'myconfig',
-            file      => $self->home->rel_file('conf/book.yaml')
+        'bcs-oracle',
+        {   dsn      => 'dbi:Oracle:',
+            user     => 'scott',
+            password => 'tiger'
         }
     );
-    $r->route('/books')->to(
-        cb => sub {
+    $r->route('/bcsora')->to(
+        sub {
             my $self = shift;
-            $self->render( 'text' => 'my yaml plugin' );
+            $self->render( 'text' => 'bcs ora text' );
         }
     );
 }

@@ -21,10 +21,11 @@ sub register {
     }
     die "file $file does not exist\n" if !-e $file;
 
-    my $stash_key = defined $conf->{stash_key} || 'config';
+    my $stash_key = $conf->{stash_key} ? $conf->{stash_key} : 'config';
     my $data_str = LoadFile($file);
 
     if ( !$app->can($stash_key) ) {
+    	$app->log->debug("got key $stash_key");
         ref($app)->attr( $stash_key => sub {$data_str} );
     }
 }
